@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajuste por Mínimos Cuadrados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ajuste de Curvas</h1>
+    <form method="POST">
+        <label for="titulo">Título de la gráfica:</label>
+        <input type="text" name="titulo" required>
+
+        <label for="nombre_y">Nombre del eje Y:</label>
+        <input type="text" name="nombre_y" required>
+
+        <label for="valores_y">Valores del eje Y (separados por comas):</label>
+        <input type="text" name="valores_y" required>
+
+        <label for="nombre_x">Nombre del eje X:</label>
+        <input type="text" name="nombre_x" required>
+
+        <label for="valores_x">Valores del eje X (separados por comas):</label>
+        <input type="text" name="valores_x" required>
+
+        <label for="grado">Grado de la curva (1, 2 o 3):</label>
+        <select name="grado" required>
+            <option value="1">1 - Lineal</option>
+            <option value="2">2 - Cuadrática</option>
+            <option value="3">3 - Cúbica</option>
+        </select>
+
+        <button type="submit">Generar Gráfica</button>
+    </form>
+
+    {% if imagen %}
+        <h2>Resultado:</h2>
+        <img src="{{ imagen }}" alt="Gráfica generada">
+    {% endif %}
+</body>
+</html>
