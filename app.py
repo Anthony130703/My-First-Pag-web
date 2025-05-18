@@ -46,11 +46,10 @@ def index():
             x_vals = np.linspace(min(valores_x), max(valores_x), 500)
             y_vals = polinomio(x_vals)
             plt.plot(x_vals, y_vals, color='red', label='Ajuste')
+            ecuacion = str(polinomio).replace('\n', ' ')
+            plt.title(f"{titulo} - Ajuste grado {grado}\nR² = {r2:.4f}\n{ecuacion}")
             plt.xlabel(nombre_x)
             plt.ylabel(nombre_y)
-            plt.title(f"{titulo} - Ajuste grado {grado}
-R² = {r2:.4f}
-{polinomio}")
             plt.legend()
             plt.grid(True)
 
@@ -67,5 +66,6 @@ R² = {r2:.4f}
 
     return render_template('index.html', imagen=None)
 
+# 👇 Esta parte es la modificación necesaria para Render 👇
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
