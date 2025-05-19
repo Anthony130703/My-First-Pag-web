@@ -53,5 +53,75 @@
     {% if imagen %}
         <img src="{{ imagen }}" style="max-width: 80%; margin-top: 20px;">
     {% endif %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const radios = document.querySelectorAll('input[name="metodo"]');
+            const inputArchivo = document.querySelector('input[name="archivo"]');
+            const inputValoresX = document.querySelector('input[name="valores_x"]');
+            const inputValoresY = document.querySelector('input[name="valores_y"]');
+
+            function actualizarCampos() {
+                const metodo = document.querySelector('input[name="metodo"]:checked').value;
+                if (metodo === 'archivo') {
+                    inputArchivo.disabled = false;
+                    inputValoresX.disabled = true;
+                    inputValoresY.disabled = true;
+                } else {
+                    inputArchivo.disabled = true;
+                    inputValoresX.disabled = false;
+                    inputValoresY.disabled = false;
+                }
+            }
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', actualizarCampos);
+            });
+
+            actualizarCampos();
+        });
+
+        document.querySelector('form[action="/"][method="POST"]').addEventListener('submit', function(event) {
+            const metodo = document.querySelector('input[name="metodo"]:checked').value;
+            const valoresX = document.querySelector('input[name="valores_x"]').value.trim();
+            const valoresY = document.querySelector('input[name="valores_y"]').value.trim();
+            const archivo = document.querySelector('input[name="archivo"]').files;
+
+            if (metodo === 'manual') {
+                if (!valoresX || !valoresY) {
+                    alert('Por favor, ingresa los valores X e Y separados por comas.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const arrX = valoresX.split(',').map(x => x.trim());
+                const arrY = valoresY.split(',').map(y => y.trim());
+
+                if (arrX.length !== arrY.length) {
+                    alert('Los valores X e Y deben tener la misma cantidad de elementos.');
+                    event.preventDefault();
+                    return;
+                }
+
+                if (arrX.some(x => isNaN(Number(x))) || arrY.some(y => isNaN(Number(y)))) {
+                    alert('Todos los valores X e Y deben ser números válidos.');
+                    event.preventDefault();
+                    return;
+                }
+            } else {
+                if (archivo.length === 0) {
+                    alert('Por favor, selecciona un archivo para subir.');
+                    event.preventDefault();
+                    return;
+                }
+                const nombreArchivo = archivo[0].name.toLowerCase();
+                if (!nombreArchivo.endsWith('.txt') && !nombreArchivo.endsWith('.docx')) {
+                    alert('El archivo debe ser .txt o .docx');
+                    event.preventDefault();
+                    return;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
