@@ -3,63 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajuste de curvas</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <h1>Ajuste de curvas</h1>
+    <div class="container">
+        <h1>Ajuste de curvas</h1>
 
-    <form action="/" method="POST" enctype="multipart/form-data">
-        <label>Título:</label>
-        <input type="text" name="titulo" required><br>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" id="titulo" required>
 
-        <label>Nombre del eje X:</label>
-        <input type="text" name="nombre_x" required><br>
+            <label for="nombre_x">Nombre del eje X:</label>
+            <input type="text" name="nombre_x" id="nombre_x" required>
 
-        <label>Nombre del eje Y:</label>
-        <input type="text" name="nombre_y" required><br>
+            <label for="nombre_y">Nombre del eje Y:</label>
+            <input type="text" name="nombre_y" id="nombre_y" required>
 
-        <label>Fuente de datos:</label><br>
-        <input type="radio" name="metodo" value="manual" checked> Ingresar manualmente<br>
-        <input type="radio" name="metodo" value="archivo"> Subir archivo<br><br>
+            <div class="radio-group">
+                <label>Fuente de datos:</label>
+                <input type="radio" name="metodo" value="manual" id="manual" checked>
+                <label for="manual" class="inline-label">Ingresar manualmente</label>
+                <br>
+                <input type="radio" name="metodo" value="archivo" id="archivo_radio">
+                <label for="archivo_radio" class="inline-label">Subir archivo</label>
+            </div>
 
-        <label>Valores X (separados por comas):</label><br>
-        <input type="text" name="valores_x"><br>
+            <label for="valores_x">Valores X (separados por comas):</label>
+            <input type="text" name="valores_x" id="valores_x">
 
-        <label>Valores Y (separados por comas):</label><br>
-        <input type="text" name="valores_y"><br>
+            <label for="valores_y">Valores Y (separados por comas):</label>
+            <input type="text" name="valores_y" id="valores_y">
 
-        <label>Archivo (.txt o .docx con X en línea 1 y Y en línea 2):</label>
-        <input type="file" name="archivo"><br>
+            <label for="archivo">Archivo (.txt o .docx con X en línea 1 y Y en línea 2):</label>
+            <input type="file" name="archivo" id="archivo">
 
-        <label>Grado del polinomio:</label>
-        <select name="grado">
-            <option value="auto">Automático</option>
-            <option value="1">1 (Recta)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select><br><br>
+            <label for="grado">Grado del polinomio:</label>
+            <select name="grado" id="grado">
+                <option value="auto">Automático</option>
+                <option value="1">1 (Recta)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
 
-        <button type="submit">Graficar</button>
-    </form>
+            <button type="submit">Graficar</button>
+        </form>
 
-    <form action="/" method="POST">
-        <input type="hidden" name="accion" value="unificar">
-        <button type="submit">Unificar gráficas existentes</button>
-    </form>
+        <form action="/" method="POST">
+            <input type="hidden" name="accion" value="unificar">
+            <button type="submit" class="secondary-button">Unificar gráficas existentes</button>
+        </form>
 
-    {% if mensaje %}
-        <p style="color: red;">{{ mensaje }}</p>
-    {% endif %}
+        {% if mensaje %}
+            <p class="mensaje">{{ mensaje }}</p>
+        {% endif %}
 
-    {% if imagen %}
-        <img src="{{ imagen }}" style="max-width: 80%; margin-top: 20px;">
-    {% endif %}
+        {% if imagen %}
+            <img src="{{ imagen }}" alt="Gráfica">
+        {% endif %}
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const radios = document.querySelectorAll('input[name="metodo"]');
-            const inputArchivo = document.querySelector('input[name="archivo"]');
-            const inputValoresX = document.querySelector('input[name="valores_x"]');
-            const inputValoresY = document.querySelector('input[name="valores_y"]');
+            const inputArchivo = document.getElementById('archivo');
+            const inputValoresX = document.getElementById('valores_x');
+            const inputValoresY = document.getElementById('valores_y');
 
             function actualizarCampos() {
                 const metodo = document.querySelector('input[name="metodo"]:checked').value;
@@ -83,9 +91,9 @@
 
         document.querySelector('form[action="/"][method="POST"]').addEventListener('submit', function(event) {
             const metodo = document.querySelector('input[name="metodo"]:checked').value;
-            const valoresX = document.querySelector('input[name="valores_x"]').value.trim();
-            const valoresY = document.querySelector('input[name="valores_y"]').value.trim();
-            const archivo = document.querySelector('input[name="archivo"]').files;
+            const valoresX = document.getElementById('valores_x').value.trim();
+            const valoresY = document.getElementById('valores_y').value.trim();
+            const archivo = document.getElementById('archivo').files;
 
             if (metodo === 'manual') {
                 if (!valoresX || !valoresY) {

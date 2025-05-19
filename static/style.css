@@ -2,54 +2,102 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
     padding: 20px;
-    max-width: 800px;
-    margin: auto;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    color: #333;
+    color: #004aad;
     text-align: center;
-}
-
-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
 }
 
 label {
     font-weight: bold;
     display: block;
-    margin-top: 10px;
+    margin-top: 15px;
+    color: #333;
 }
 
 input[type="text"],
+input[type="file"],
 select {
     width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+input[type="radio"] {
+    margin-right: 6px;
+}
+
+.inline-label {
+    display: inline;
+    margin-right: 15px;
+    font-weight: normal;
+    color: #333;
+}
+
+.radio-group {
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 button {
-    margin-top: 20px;
-    background-color: #007BFF;
+    margin-top: 25px;
+    background-color: #004aad;
     color: white;
-    padding: 10px 15px;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #003080;
+}
+
+.secondary-button {
+    background-color: #1e40af;
+    margin-top: 10px;
+}
+
+.secondary-button:hover {
+    background-color: #162c77;
 }
 
 img {
     display: block;
-    margin: 20px auto;
+    margin: 20px auto 0;
     max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.mensaje {
+    color: #c53030;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffe5e5;
+    padding: 10px;
+    border-radius: 6px;
 }
