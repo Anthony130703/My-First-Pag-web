@@ -1,4 +1,3 @@
 flask
 matplotlib
 numpy
-python-docx
