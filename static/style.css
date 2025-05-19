@@ -1,103 +1,126 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f4ff;
+    padding: 40px;
     margin: 0;
     display: flex;
     justify-content: center;
+    align-items: start;
+    min-height: 100vh;
 }
 
+/* Contenedor principal */
 .container {
-    max-width: 700px;
+    max-width: 720px;
     width: 100%;
     background-color: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Título principal */
 h1 {
     color: #004aad;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    font-size: 2rem;
 }
 
+/* Etiquetas */
 label {
-    font-weight: bold;
+    font-weight: 600;
     display: block;
-    margin-top: 15px;
+    margin-top: 18px;
+    margin-bottom: 6px;
     color: #333;
 }
 
+/* Inputs, archivo y select */
 input[type="text"],
 input[type="file"],
 select {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 14px 20px;
+    margin-top: 4px;
     border: 1.5px solid #ccc;
-    border-radius: 6px;
+    border-radius: 30px;
     font-size: 1rem;
     box-sizing: border-box;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
 }
 
+input[type="text"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #004aad;
+    outline: none;
+}
+
+/* Radios */
 input[type="radio"] {
-    margin-right: 6px;
+    transform: scale(1.2);
+    margin-right: 8px;
 }
 
 .inline-label {
     display: inline;
-    margin-right: 15px;
+    margin-right: 20px;
     font-weight: normal;
     color: #333;
 }
 
 .radio-group {
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
+/* Botones principales */
 button {
     margin-top: 25px;
-    background-color: #004aad;
+    background: linear-gradient(to right, #004aad, #003080);
     color: white;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
     width: 100%;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #003080;
+    background: linear-gradient(to right, #003080, #001e4d);
+    transform: scale(1.02);
 }
 
+/* Botón secundario */
 .secondary-button {
-    background-color: #1e40af;
-    margin-top: 10px;
+    background: linear-gradient(to right, #1e40af, #162c77);
 }
 
 .secondary-button:hover {
-    background-color: #162c77;
+    background: linear-gradient(to right, #162c77, #0d1b4d);
 }
 
+/* Imagen de resultado */
 img {
     display: block;
-    margin: 20px auto 0;
+    margin: 30px auto 0;
     max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+/* Mensaje de error o información */
 .mensaje {
     color: #c53030;
     margin-top: 20px;
     font-weight: bold;
     text-align: center;
     background-color: #ffe5e5;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 12px;
+    border-radius: 30px;
 }
