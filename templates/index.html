@@ -2,40 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ajuste por Mínimos Cuadrados</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Ajuste de curvas</title>
 </head>
 <body>
-    <h1>Ajuste de Curvas</h1>
-    <form method="POST">
-        <label for="titulo">Título de la gráfica:</label>
-        <input type="text" name="titulo" required>
+    <h1>Ajuste de curvas</h1>
 
-        <label for="nombre_y">Nombre del eje Y:</label>
-        <input type="text" name="nombre_y" required>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <label>Título:</label>
+        <input type="text" name="titulo" required><br>
 
-        <label for="valores_y">Valores del eje Y (separados por comas):</label>
-        <input type="text" name="valores_y" required>
+        <label>Nombre del eje X:</label>
+        <input type="text" name="nombre_x" required><br>
 
-        <label for="nombre_x">Nombre del eje X:</label>
-        <input type="text" name="nombre_x" required>
+        <label>Nombre del eje Y:</label>
+        <input type="text" name="nombre_y" required><br>
 
-        <label for="valores_x">Valores del eje X (separados por comas):</label>
-        <input type="text" name="valores_x" required>
+        <label>Fuente de datos:</label><br>
+        <input type="radio" name="metodo" value="manual" checked> Ingresar manualmente<br>
+        <input type="radio" name="metodo" value="archivo"> Subir archivo<br><br>
 
-        <label for="grado">Grado de la curva (1, 2 o 3):</label>
-        <select name="grado" required>
-            <option value="1">1 - Lineal</option>
-            <option value="2">2 - Cuadrática</option>
-            <option value="3">3 - Cúbica</option>
-        </select>
+        <label>Valores X (separados por comas):</label><br>
+        <input type="text" name="valores_x"><br>
 
-        <button type="submit">Generar Gráfica</button>
+        <label>Valores Y (separados por comas):</label><br>
+        <input type="text" name="valores_y"><br>
+
+        <label>Archivo (.txt o .docx con X en línea 1 y Y en línea 2):</label>
+        <input type="file" name="archivo"><br>
+
+        <label>Grado del polinomio:</label>
+        <select name="grado">
+            <option value="auto">Automático</option>
+            <option value="1">1 (Recta)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br><br>
+
+        <button type="submit">Graficar</button>
     </form>
 
+    <form action="/" method="POST">
+        <input type="hidden" name="accion" value="unificar">
+        <button type="submit">Unificar gráficas existentes</button>
+    </form>
+
+    {% if mensaje %}
+        <p style="color: red;">{{ mensaje }}</p>
+    {% endif %}
+
     {% if imagen %}
-        <h2>Resultado:</h2>
-        <img src="{{ imagen }}" alt="Gráfica generada">
+        <img src="{{ imagen }}" style="max-width: 80%; margin-top: 20px;">
     {% endif %}
 </body>
 </html>
